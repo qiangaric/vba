@@ -1,0 +1,11 @@
+1，隐藏欧数列
+Sub hidden()
+    Dim i As Integer, tim
+    tim = Timer
+    Application.ScreenUpdating = False
+    For i = ActiveSheet.UsedRange.Rows.Count To 2 Step -1
+        Rows(i).hidden = (i Mod 2 = 0)
+    Next i
+    Application.ScreenUpdating = True
+    MsgBox Format(Timer - tim, "0.00s")
+End Sub
