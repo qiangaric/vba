@@ -1,0 +1,16 @@
+Sub test()
+ Dim i As Integer
+ Dim rng As Range
+  [c1] = "comments"
+ For Each rng In Range([b2], Cells(Rows.Count, 2).End(xlUp))
+    If rng < 60 Then
+        i = i + 1
+        rng.Offset(0, 1) = "不及格"
+        rng.Interior.ColorIndex = 10
+       
+    ElseIf rng > 95 Then
+        rng.Offset(0, 1) = "优秀"
+    End If
+Next rng
+ [d1] = "不及格： " & i & "人"
+End Sub
