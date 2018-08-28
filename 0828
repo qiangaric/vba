@@ -1,3 +1,4 @@
+1,成绩标记
 Sub test()
  Dim i As Integer
  Dim rng As Range
@@ -13,4 +14,15 @@ Sub test()
     End If
 Next rng
  [d1] = "不及格： " & i & "人"
+End Sub
+2，删除空数据
+Sub test()
+ Dim i As Integer
+ Dim rng As Range
+ Application.ScreenUpdating = False
+ For i = Cells(Rows.Count, 3).End(xlUp).Row To 2 Step -1
+    If Len(Cells(i, 3)) = 0 Then Cells(i, 2).EntireRow.Delete
+    MsgBox Len(Cells(i, 3))
+    Next
+Application.ScreenUpdating = True
 End Sub
