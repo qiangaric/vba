@@ -1,0 +1,27 @@
+'https://dev.mysql.com/downloads/connector/net/ 下载vba驱动
+
+Sub TestConnectTodb()
+    Dim cn As Object    '定义数据链接对象 ，保存连接数据库信息
+    Dim rs As Object    '定义记录集对象，保存数据表
+    Dim sh As Worksheet
+     Dim sht As Worksheet
+    Set conn = CreateObject("ADODB.Connection")  '创建数据链接对象
+    Set rs = CreateObject("ADODB.RecordSet")  '创建记录集对象
+    
+    Range("a1:b1") = Array("host", "user")
+    conn.ConnectionString = "Driver={MySQL ODBC 8.0 Unicode Driver};Server=192.168.1.80;Port=3306;Database=mysql;Uid=root;Pwd=123456;OPTION=3;"
+    conn.Open
+    rs.Open "SELECT host,user FROM user", conn
+    i = 2
+Set sht = ThisWorkbook.Worksheets("sheets")
+Do While Not rs.EOF     '当数据指针未移到记录集末尾时，循环下列操作
+    sht.Cells(i, 1) = rs("host")    '把当前记录的字段1的值保存到sheet1工作表的第i行第1列
+    sht.Cells(i, 2) = rs("user")
+    rs.MoveNext                      '把指针移向下一条记录
+    i = i + 1                        'i加1，准备把下一记录相关字段的值保存到工作表的下一行
+Loop
+    rs.Close: Set rs = Nothing
+    conn.Close: Set conn = Nothing
+    MsgBox "处理完毕", vbOKOnly, "提示信息"
+End Sub
+
