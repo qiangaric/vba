@@ -1,0 +1,34 @@
+Sub NewSeriesNames1()
+Dim co As ChartObject
+Dim ch As Chart
+Dim s As Series
+Dim sh As Worksheet
+     
+    
+    Set sh = Worksheets("Sheet3")
+     Set co = Worksheets("sheet3").ChartObjects.Add(Range("E2").Left, Range("E2").Top, 500, 300)
+     
+     Set ch = co.Chart
+    
+     
+     With ch
+            .HasLegend = True
+               .HasTitle = True
+               
+                    
+            Set s = .SeriesCollection.NewSeries
+             
+            s.Name = sh.Range("B1")
+            s.XValues = sh.Range("A2", Range("A1").Offset(1, 0).End(xlDown))
+            s.Values = sh.Range("B2", Range("A1").Offset(1, 1).End(xlDown))
+            
+            Set s = ch.SeriesCollection.NewSeries
+            
+            s.Name = sh.Range("C1")
+            s.XValues = sh.Range("A2", Range("A1").Offset(1, 0).End(xlDown))
+            s.Values = sh.Range("C2", Range("A1").Offset(1, 2).End(xlDown))
+            ch.Legend.Select
+            ch.SetElement (msoElementLegendNone)
+    End With
+        
+End Sub
