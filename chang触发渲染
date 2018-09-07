@@ -1,0 +1,7 @@
+Private Sub Worksheet_Change(ByVal Target As Excel.Range)
+    Dim rng As Variant
+   Sheet1.UsedRange.Select
+   For Each rng In Sheet1.UsedRange
+     rng.Borders.LineStyle = 7
+ Next rng
+End Sub
